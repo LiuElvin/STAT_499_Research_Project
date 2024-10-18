@@ -45,8 +45,6 @@ I've also provided some example code if reproduction is of interest.
 
   - The 1st column is a special column - its data is `rnorm()` plus or minus 2.2 depending on which class it is.
 
-    - The 1st column is thus the best indicator for which class our data falls into (aside from the class label).
-
 ```{r}
 num_dimensions <- 39
 num_data_points <- 20
@@ -73,7 +71,9 @@ class2_data <- cbind(class2_data, rep(0, num_data_points))
 <img src="./img/dummy_3.png" width="90%" />
 </p>
 
-The above histograms show how distinguishable the 2 classes are when graphed against the 1st column.
+The above histograms show how distinguishable the 2 classes are when graphed against the 1st column (Variable 1).
+
+The 1st column is thus the best indicator for which class our data falls into (aside from the class label).
 
 # Colon Cancer Dataset Results
 
