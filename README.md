@@ -127,6 +127,15 @@ PDA projecting almost entirely upon the 1st column.
 
 # Colon Cancer Dataset Results
 
+A 2-D LDA projection is on the left while a 2-D PDA projection is on the right.
+
+<p float="left">
+  <img src="./img/cancer_1.png" width="45%" />
+  <img src="./img/cancer_2.png" width="45%" /> 
+</p>
+
+Compared to an SVM...
+
 ---
 
 # Contributions
