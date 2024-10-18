@@ -150,7 +150,7 @@ Variable 1 is, unsurprisingly the most important variable in both LDA and PDA, w
 
 2. The PDA projection on the testing data yields an accuracy of 0.9091.
 
-To see if this is a good classification method or not, we can compare to a Support Vector Machine.
+To see if this is a good classification method or not, we can compare performance to a Support Vector Machine.
 
 Using the `e1071` package in R, we can call the `svm()` function for a confusion matrix.
 
