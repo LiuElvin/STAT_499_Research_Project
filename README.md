@@ -173,7 +173,7 @@ The following is a rather incomplete comparison between t-test (which measures s
 However, I'll include it here in hopes I comeback to it at some time.
 
 <p align="center">
-<img src="./img/weight_3.png" width="50%" />
+<img src="./img/weight_3.png" width="90%" />
 </p>
 
 ---
