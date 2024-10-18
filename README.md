@@ -166,14 +166,30 @@ The accuracy for PDA is substantially better.
 
 A comparison of PDA's ($\lambda = 0.5$) 10 most important columns and how important those corresponding columns are for LDA:
 
+*Note:*
+
+  *1. The height of the blue represents the importance of the column for PDA*
+
+  *2. The height of the red represents the importance of the column for LDA*
+
+  *3. In this case, blue > red makes sense since the columns are blue's most important*
+
 <p align="center">
-<img src="./img/weight_1.png" width="90%" />
+<img src="./img/weight_2.png" width="90%" />
 </p>
 
 A comparison of LDA's 10 most important columns and how important those corresponding columns are for PDA ($\lambda = 0.5$):
 
+*Note:*
+
+  *1. The height of the blue represents the importance of the column for PDA*
+
+  *2. The height of the red represents the importance of the column for LDA*
+
+  *3. In this case, red > blue makes sense since the columns are red's most important*
+
 <p align="center">
-<img src="./img/weight_2.png" width="90%" />
+<img src="./img/weight_1.png" width="90%" />
 </p>
 
 # (Tentative!!!)
