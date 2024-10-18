@@ -45,7 +45,7 @@ I've also provided some example code if reproduction is of interest.
 
   - The 1st column is a special column - its data is `rnorm()` plus or minus 2.2 depending on which class it is.
 
-    - The first column is thus the best indicator for which class our data falls into (aside from the class label).
+    - The 1st column is thus the best indicator for which class our data falls into (aside from the class label).
 
 ```{r}
 num_dimensions <- 39
@@ -71,7 +71,13 @@ ggplot(class1_data_df, aes(x = V1)) +
   labs(title = "Histogram of Class 1 Data", x = "Variable 1")
 ```
 
-The above graphs represent the 2 classes
+<p float="left">
+  <img src="./img/dummy_1.png" width="32%" />
+  <img src="./img/dummy_2.png" width="32%" />
+  <img src="./img/dummy_3.png" width="32%" />
+</p>
+
+The above histograms show how distinguishable the 2 classes are when graphed against the 1st column.
 
 # Colon Cancer Dataset Results
 
