@@ -14,6 +14,8 @@ A link to the full page with all of the SPA DRP projects of Autumn 2023 (includi
 
 My results were summarized in an end of quarter presentation. The full slide deck can be found [here](https://docs.google.com/presentation/d/1oSrP5NRSWhoQRwXVjOmNRvVN8d4FA-LlYU0DCK1PzhE/edit?usp=sharing).
 
+<div style="text-align: center"><iframe src="https://docs.google.com/spreadsheets/d/1C9znokjgbBoPrOZiIe1BKdnNz44FkiyyZTDfi1rH-CI/pubhtml?widget=true&amp;headers=false"></iframe></div>
+
 # Files
 
 - `./data` contains the colon cancer dataset.
