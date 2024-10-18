@@ -48,7 +48,6 @@ I've also provided some example code if reproduction is of interest.
 ```{r}
 num_dimensions <- 39
 num_data_points <- 20
-
 mean_class <- 2.2
 
 set.seed(123)
@@ -60,6 +59,14 @@ set.seed(123)
 class2_data <- matrix(rnorm(num_data_points * num_dimensions), nrow = num_data_points)
 class2_data[, 1] <- class2_data[, 1] - mean_class
 class2_data <- cbind(class2_data, rep(0, num_data_points))
+
+data <- rbind(class1_data, class2_data)
+data_df <- as.data.frame(data)
+
+ggplot(data_df, aes(x = V1, fill = factor(ifelse(V1 >= 0, "Class 1", "Class 2")))) +
+  geom_histogram(binwidth = 0.1) +
+  scale_fill_manual(values = c("Class 1" = "red", "Class 2" = "blue")) +
+  labs(title = "Histogram of Class 1 and 2 Data", x = "Variable 1")
 ```
 
 <p align="center">
