@@ -8,7 +8,7 @@ In this project, we will first learn some classical supervised classification te
 
 Next, we will mainly explore Penalized Discriminant Analysis (PDA), which is designed to classify high-dimensional data as an extension of the classical Linear Discriminant Analysis. It classifies data by finding the optimal lower-dimension projections that reveal “interesting structures” in the original dataset.
 
-Finally, we will implement PDA to analyze a real-life colon cancer dataset alongside some simple toy examples.
+Finally, we will implement PDA to analyze a real-life colon cancer dataset alongside some simple toy examples. Comparisons are also drawn to the performance of each model.
 
 A link to all of the SPA DRP projects of Autumn 2023 (including mine) is provided [here](https://spa-drp.github.io///past-projects/2023-autumn/).
 
