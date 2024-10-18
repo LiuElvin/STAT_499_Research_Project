@@ -166,7 +166,7 @@ The accuracy for PDA is substantially better.
 
 A comparison of PDA's ($\lambda = 0.5$) 10 most important columns and how important those corresponding columns are for LDA:
 
-*Note:*
+*- Note:*
 
   *- The height of the blue represents the significance of the column for PDA*
 
@@ -180,7 +180,7 @@ A comparison of PDA's ($\lambda = 0.5$) 10 most important columns and how import
 
 A comparison of LDA's 10 most important columns and how important those corresponding columns are for PDA ($\lambda = 0.5$):
 
-*Note:*
+*- Note:*
 
   *- The height of the blue represents the significance of the column for PDA*
 
