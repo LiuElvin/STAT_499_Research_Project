@@ -77,7 +77,7 @@ The above histogram shows how separable the 2 classes are when graphed against t
 
 The 1st column is thus the best indicator for which class our data falls into (aside from the class label).
 
-Both LDA and PDA are able to recognize this, both producing highly separated 1-D and 2-D projections below:
+Both LDA and PDA are able to recognize this, both producing highly separated 1-D and 2-D projections of the training data below:
 
 ```{r}
 test_proportion <- 0.25
@@ -116,9 +116,9 @@ title("PDA, Lambda = 0.1")
   <img src="./img/dummy_3.png" width="45%" /> 
 </p>
 
-The barcharts below represent the importance of each column in the projections for LDA and PDA. 
+The barcharts below represent the importance of each column in the projections for LDA and PDA ($\lambda = 0.5$). 
 
-Variable 1 is, unsurprisingly the most important variable in both LDA and PDA ($\lambda = 0.5$), with PDA projecting almost entirely upon the 1st column.
+Variable 1 is, unsurprisingly the most important variable in both LDA and PDA, with PDA projecting almost entirely upon the 1st column.
 
 <p float="left">
   <img src="./img/dummy_4.png" width="45%" />
@@ -131,7 +131,9 @@ In the colon cancer dataset we predict whether a piece of connective tissue is n
 
 Class 1 represents normal tissue while Class 2 represents a malignant tumor.
 
-A 2-D LDA projection is on the left while a 2-D PDA ($\lambda = 0.5$) projection is on the right.
+A 2-D LDA projection on the testing data is on the left and...
+
+A 2-D PDA ($\lambda = 0.5$) projection on the testing data is on the right.
 
 <p float="left">
   <img src="./img/cancer_1.png" width="45%" />
