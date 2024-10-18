@@ -79,6 +79,38 @@ The 1st column is thus the best indicator for which class our data falls into (a
 
 Both LDA and PDA are able to recognize this, both producing highly separated 1-D and 2-D projections:
 
+```{r}
+test_proportion <- 0.25
+n <- nrow(data_df)
+ind <- sample(1:n, test_proportion * n, replace = FALSE)
+
+test <- (data_df[ind, 1:(n - 1)])
+train <- (data_df[-ind, 1:(n - 1)])
+
+target_labels <- data_df$V40
+class_test <- as.data.frame(target_labels[ind])
+class_train <- as.data.frame(target_labels[-ind])
+par(mfrow = c(2, 2))
+
+PP.opt = PP.optimize.anneal("LDA", 1, train, class_train)
+PP.optimize.plot(PP.opt, train, class_train)
+title("LDA")
+
+PP.opt = PP.optimize.anneal("LDA", 2, train, class_train)
+PP.optimize.plot(PP.opt, train, class_train)
+title("LDA")
+
+PP.opt = PP.optimize.anneal("PDA", 1, train, class_train, lambda = 0.1)
+PP.optimize.plot(PP.opt, train, class_train)
+title("PDA, Lambda = 0.1")
+
+PP.opt = PP.optimize.anneal("PDA", 2, train, class_train, lambda = 0.1)
+PP.optimize.plot(PP.opt, train, class_train)
+title("PDA, Lambda = 0.1")
+
+...
+```
+
 <p float="left">
   <img src="./img/dummy_2.png" width="45%" />
   <img src="./img/dummy_3.png" width="45%" /> 
