@@ -116,7 +116,7 @@ title("PDA, Lambda = 0.1")
   <img src="./img/dummy_3.png" width="45%" /> 
 </p>
 
-The graph below represents the importance of each column in the projections for LDA and PDA. 
+The barcharts below represent the importance of each column in the projections for LDA and PDA. 
 
 Variable 1 is, unsurprisingly the most important variable in both LDA and PDA, with PDA projecting almost entirely upon the 1st column.
 
