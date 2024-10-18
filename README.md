@@ -79,12 +79,9 @@ The 1st column is thus the best indicator for which class our data falls into (a
 
 Both LDA and PDA are able to recognize this, both producing highly separated 1-D and 2-D projections:
 
-<p align="center">
-<img src="./img/dummy_2.png" width="90%" />
-</p>
-
-<p align="center">
-<img src="./img/dummy_3.png" width="90%" />
+<p float="left">
+  <img src="./img/dummy_2.png" width="45%" />
+  <img src="./img/dummy_3.png" width="45%" /> 
 </p>
 
 # Colon Cancer Dataset Results
