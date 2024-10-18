@@ -24,9 +24,9 @@ A link to the full page with all of the SPA DRP projects of Autumn 2023 (includi
 
 # Files
 
-- `./data` contains the colon cancer data used for projections.
+- `./data` contains the colon cancer dataset used for projections.
 - `./code` includes all of the code.
-  - `./code/annotation`: annotation.
+  - `./code/annotation`: annotations of useful R functions.
 
 ---
 
