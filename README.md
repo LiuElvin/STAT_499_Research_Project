@@ -1,11 +1,5 @@
 # Classify High-Dimensional Data
 
-# Files
-
-- `./data` contains the colon cancer dataset used for projections.
-- `./code` includes all of the code.
-  - `./code/annotation`: annotations of useful R functions.
-
 # General Project Overview
 
 In machine learning, classification is a task that assigns a class label to examples from the problem domain. However, high dimensionality poses significant statistical challenges and renders many traditional classification algorithms impractical to use.
@@ -17,6 +11,12 @@ Next, we will mainly explore Penalized Discriminant Analysis (PDA), which is des
 Finally, we will implement PDA to analyze a real-life colon cancer dataset alongside some simple toy examples. Comparisons are also drawn to the performance of each model.
 
 A link to the full page with all of the SPA DRP projects of Autumn 2023 (including mine) is provided [here](https://spa-drp.github.io///past-projects/2023-autumn/).
+
+# Files
+
+- `./data` contains the colon cancer dataset.
+- `./code` includes all of the code.
+  - `./code/annotation`: annotations of useful R functions.
 
 # Stuff
 
