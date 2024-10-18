@@ -135,7 +135,7 @@ Variable 1 is, unsurprisingly the most important variable in both LDA and PDA, w
 
   - Class 1 represents normal tissue while Class 2 represents a malignant tumor.
  
-- Let’s split training/testing in a 70:30 ratio where we train on training data and project testing data
+- Let’s split training/testing in a 70:30 ratio, where we train on training data and project testing data
 
 1. A 2-D LDA projection on the testing data is on the left and...
 
