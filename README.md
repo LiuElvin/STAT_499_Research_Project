@@ -154,7 +154,15 @@ Variable 1 is, unsurprisingly the most important variable in both LDA and PDA, w
 
 To see if this is a good classification method or not, we can compare to a Support Vector Machine.
 
-Running our 
+Using the `e1071` package in R, we can call the `svm()` function for a confusion matrix.
+
+<p align="center">
+<img src="./img/confusion.png" width="50%" />
+</p>
+
+$\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} = \frac{6 + 2}{6 + 2 + 3 + 0} = 0.7273$
+
+> The accuracy for PDA is substantially better
 
 ---
 
