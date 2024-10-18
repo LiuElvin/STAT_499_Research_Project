@@ -37,12 +37,10 @@ A link to the full page with all of the SPA DRP projects of Autumn 2023 (includi
 - Zhaoxing Wu, my mentor, provided a list of machine learning literature for my understanding along with a lot of guidance for the direction of my project.
 
   - A link to her paper, which much of my project is based off of, can be found [here](https://jds-online.org/journal/JDS/article/1326/info).
+ 
+- The dataset was fetched from Notterman, et al, Cancer Research vol. 61: 2001.
 
-# Learning Outcomes
-
-- Learnt theoretics behind classical supervised classification techniques (decision trees, random forests, etc.).
-
-- Learnt the curse of dimensionality and how  ruins traditional machine learning model predictions.
+  - The link can be accessed via [Princeton](http://genomics-pubs.princeton.edu/oncology/database.html).
 
 # Learning Outcomes
 
