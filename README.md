@@ -116,6 +116,13 @@ title("PDA, Lambda = 0.1")
   <img src="./img/dummy_3.png" width="45%" /> 
 </p>
 
+Variable 1 is also unsurprisingly the most important variable in both LDA and PDA.
+
+<p float="left">
+  <img src="./img/dummy_4.png" width="45%" />
+  <img src="./img/dummy_5.png" width="45%" /> 
+</p>
+
 # Colon Cancer Dataset Results
 
 ---
