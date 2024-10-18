@@ -48,6 +48,8 @@ A link to the full page with all of the SPA DRP projects of Autumn 2023 (includi
 
 - Learnt theoretics behind classical supervised classification techniques.
 
-- Learnt the curse of dimensionality and how it ruins traditional machine learning models on high dimension low sample size data.
+- Learnt the curse of dimensionality and how high dimension low sample size data ruins traditional machine learning models.
 
 - Learnt the concept of Penalized Discriminant Analysis as an extension of Linear Discriminant Analysis.
+
+- Ran multiple projections on training / testing data and created corresponding graphs in R.
