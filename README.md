@@ -52,6 +52,6 @@ A link to the full page with all of the SPA DRP projects of Autumn 2023 (includi
 
 - Learnt the concept of Penalized Discriminant Analysis as an extension of Linear Discriminant Analysis.
 
-- Ran multiple projections on training / testing data and created corresponding graphs in R.
+- Created and ran multiple projection functions on training / testing data and created corresponding graphs in R.
 
 - Learnt how to create ideal dummy simulations and how to generalize results off it.
