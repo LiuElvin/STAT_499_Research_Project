@@ -162,9 +162,9 @@ $$\text{Accuracy (for SVM)} = \frac{TP + TN}{TP + TN + FP + FN} = \frac{6 + 2}{6
 
 The accuracy for PDA is substantially better.
 
-# Comparison
+# LDA vs. PDA ($\lambda = 0.5$)
 
-A comparison of PDA's ($\lambda = 0.5$) 10 most important columns and how important those corresponding columns are for LDA:
+A comparison of PDA's 10 most important columns and how important those corresponding columns are for LDA:
 
 - *Note:*
 
@@ -178,7 +178,7 @@ A comparison of PDA's ($\lambda = 0.5$) 10 most important columns and how import
 <img src="./img/weight_2.png" width="90%" />
 </p>
 
-A comparison of LDA's 10 most important columns and how important those corresponding columns are for PDA ($\lambda = 0.5$):
+A comparison of LDA's 10 most important columns and how important those corresponding columns are for PDA:
 
 - *Note:*
 
