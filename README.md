@@ -108,7 +108,7 @@ PP.opt = PP.optimize.anneal("PDA", 2, train, class_train, lambda = 0.1)
 PP.optimize.plot(PP.opt, train, class_train)
 title("PDA, Lambda = 0.1")
 
-...
+# etc.
 ```
 
 <p float="left">
