@@ -127,6 +127,8 @@ PDA projecting almost entirely upon the 1st column.
 
 # Colon Cancer Dataset Results
 
+Class 1 represents normal tissue while Class 2 represents a malignant tumor.
+
 A 2-D LDA projection is on the left while a 2-D PDA projection is on the right.
 
 <p float="left">
