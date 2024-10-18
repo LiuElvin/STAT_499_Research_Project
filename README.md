@@ -168,7 +168,7 @@ A comparison of LDA's 10 most important columns compared to PDA's 10 most import
 
 # (Tentative!!!)
 
-The following is a rather incomplete comparison between t-test (which measures significance of differences) and PDA.
+The following is a very incomplete comparison between t-test (which measures significance of differences) and PDA.
 
 However, I'll include it here in hopes I comeback to it at some time.
 
