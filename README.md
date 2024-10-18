@@ -136,6 +136,8 @@ Variable 1 is, unsurprisingly the most important variable in both LDA and PDA, w
 - Altogether, we have a sample size of 36 and around 6600 features.
 
   - Class 1 represents normal tissue while Class 2 represents a malignant tumor.
+ 
+- Let’s split training/testing in a 70:30 ratio where we train on training data and project testing data
 
 A 2-D LDA projection on the testing data is on the left and...
 
@@ -146,11 +148,13 @@ A 2-D PDA ($\lambda = 0.5$) projection on the testing data is on the right.
   <img src="./img/cancer_2.png" width="45%" /> 
 </p>
 
-The LDA projection on the testing data yields an accuracy of 0.8182.
+1. The LDA projection on the testing data yields an accuracy of 0.8182.
 
-The PDA projection on the testing data yields an accuracy of 0.9091.
+2. The PDA projection on the testing data yields an accuracy of 0.9091.
 
-Compared to an SVM...
+To see if this is a good classification method or not, we can compare to a Support Vector Machine.
+
+Running our 
 
 ---
 
