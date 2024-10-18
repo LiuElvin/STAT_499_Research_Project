@@ -71,7 +71,7 @@ class2_data <- cbind(class2_data, rep(0, num_data_points))
 <img src="./img/dummy_3.png" width="90%" />
 </p>
 
-The above histograms show how distinguishable the 2 classes are when graphed against the 1st column (Variable 1).
+The above histograms show how separable the 2 classes are when graphed against the 1st column (Variable 1).
 
 The 1st column is thus the best indicator for which class our data falls into (aside from the class label).
 
