@@ -65,9 +65,12 @@ class2_data <- cbind(class2_data, rep(0, num_data_points))
 ```
 
 <p float="left">
-  <img src="./img/dummy_1.png" width="32%" />
-  <img src="./img/dummy_2.png" width="32%" />
-  <img src="./img/dummy_3.png" width="32%" />
+  <img src="./img/dummy_1.png" width="45%" />
+  <img src="./img/dummy_2.png" width="45%" />
+</p>
+
+<p align="center">
+<img src="./img/dummy_3.png" width="90%" />
 </p>
 
 The above histograms show how distinguishable the 2 classes are when graphed against the 1st column.
