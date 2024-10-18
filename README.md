@@ -172,7 +172,7 @@ A comparison of PDA's ($\lambda = 0.5$) 10 most important columns and how import
 
   - *The height of the red represents the significance of the column for LDA*
 
-  - *In this case, blue > red makes sense since the columns are blue's most important*
+  - *In this case, blue > red makes sense since the columns are blue's most important (and not necessarily red's)*
 
 <p align="center">
 <img src="./img/weight_2.png" width="90%" />
@@ -186,7 +186,7 @@ A comparison of LDA's 10 most important columns and how important those correspo
 
   - *The height of the red represents the significance of the column for LDA*
 
-  - *In this case, red > blue makes sense since the columns are red's most important*
+  - *In this case, red > blue makes sense since the columns are red's most important (and not necessarily blue's)*
 
 <p align="center">
 <img src="./img/weight_1.png" width="90%" />
