@@ -127,9 +127,15 @@ Variable 1 is, unsurprisingly the most important variable in both LDA and PDA, w
 
 # Colon Cancer Dataset Results
 
-In the colon cancer dataset we predict whether a piece of connective tissue is normal or a malignant tumor.
+- In the colon cancer dataset, we predict whether a piece of connective tissue is normal or a malignant tumor.
 
-Class 1 represents normal tissue while Class 2 represents a malignant tumor.
+  - 18 malignant cancer tumors are paired with 18 normal tissue.
+
+  - There are also 3200 full length human cDNA and 3400 expressed sequence tags as columns.
+
+- Altogether, we have a sample size of 36 and around 6600 features.
+
+  - Class 1 represents normal tissue while Class 2 represents a malignant tumor.
 
 A 2-D LDA projection on the testing data is on the left and...
 
