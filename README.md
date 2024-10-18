@@ -40,7 +40,7 @@ A link to the full page with all of the SPA DRP projects of Autumn 2023 (includi
  
 - The dataset was fetched from Notterman, et al, Cancer Research vol. 61: 2001.
 
-  - The link can be accessed via [Princeton](http://genomics-pubs.princeton.edu/oncology/database.html).
+  - The link to the raw files can be accessed via [Princeton](http://genomics-pubs.princeton.edu/oncology/database.html).
 
 # Learning Outcomes
 
