@@ -20,7 +20,7 @@ My results were summarized in an end of quarter presentation. The full slide dec
 - `./code` includes all of the code.
   - `./code/annotation`: annotations of useful R functions.
 
-# Results
+# Dummy Example Results
 
 Below are the 1-D and 2-D projections of a dummy simulation.
 
@@ -34,9 +34,7 @@ install_github("EK-LEE/classPP")
 library(classPP)
 ```
 
-# Dummy Example
-
-# Colon Cancer Results
+# Colon Cancer Dataset Results
 
 ---
 
