@@ -24,7 +24,7 @@ In order to access the projection pursuit packages
  
 # Set Up Side Note
 
-In order to access the projection pursuit library and its functions, you'll first need to load `devtools` and install like so:
+In order to access the projection pursuit library functions, you'll first need to load `devtools` and install like so:
 
 ```{r}
 library(devtools)
