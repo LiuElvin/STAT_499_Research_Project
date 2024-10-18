@@ -12,6 +12,8 @@ Finally, we will implement PDA to analyze a real-life colon cancer dataset along
 
 A link to the full page with all of the SPA DRP projects of Autumn 2023 (including mine) is provided [here](https://spa-drp.github.io///past-projects/2023-autumn/).
 
+The results were summarized in my end of quarter presentation. The full slide deck can be found [here](https://docs.google.com/presentation/d/1oSrP5NRSWhoQRwXVjOmNRvVN8d4FA-LlYU0DCK1PzhE/edit?usp=sharing).
+
 # Files
 
 - `./data` contains the colon cancer dataset.
