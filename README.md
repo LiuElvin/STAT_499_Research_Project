@@ -141,6 +141,8 @@ PDA projecting almost entirely upon the 1st column.
 
   - The link to the raw files can be accessed via [Princeton](http://genomics-pubs.princeton.edu/oncology/database.html).
 
+- Everything else (the dummy examples, the graphs, projections on the colon cancer data set, etc.) however are all my work.
+
 # Learning Outcomes
 
 - Learnt theoretics behind classical supervised classification techniques.
