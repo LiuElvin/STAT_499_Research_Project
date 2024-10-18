@@ -22,9 +22,9 @@ In order to access the projection pursuit packages
 - `./code` includes all of the code.
   - `./code/annotation`: annotations of useful R functions.
  
-## Set Up Side Note
+# Set Up Side Note
 
-In order to access the projection pursuit library, you'll first need to use `devtools` and install like so:
+In order to access the projection pursuit library and its functions, you'll first need to load `devtools` and install like so:
 
 ```{r}
 library(devtools)
@@ -36,6 +36,8 @@ install_github("EK-LEE/classPP")
 Below are the 1-D and 2-D projections of a dummy simulation.
 
 I've also provided some example code if reproduction is of interest.
+
+Dataset of sample size 40 with 40 columns (1 of which classifies whether the data point is class1 or class2):
 
 ```{r}
 num_dimensions <- 39
