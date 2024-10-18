@@ -77,7 +77,7 @@ The above histogram shows how separable the 2 classes are when graphed against t
 
 The 1st column is thus the best indicator for which class our data falls into (aside from the class label).
 
-Both LDA and PDA are able to recognize this, both producing highly separated 1-D and 2-D projections:
+Both LDA and PDA are able to recognize this, both producing highly separated 1-D and 2-D projections below:
 
 ```{r}
 test_proportion <- 0.25
@@ -116,7 +116,7 @@ title("PDA, Lambda = 0.1")
   <img src="./img/dummy_3.png" width="45%" /> 
 </p>
 
-Variable 1 is, unsurprisingly the most important variable in both LDA and PDA, with PDA projecting almost entirely upon the 1st column.
+As we see below Variable 1 is, unsurprisingly the most important variable in both LDA and PDA, with PDA projecting almost entirely upon the 1st column.
 
 <p float="left">
   <img src="./img/dummy_4.png" width="45%" />
