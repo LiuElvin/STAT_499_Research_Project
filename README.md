@@ -139,9 +139,9 @@ Variable 1 is, unsurprisingly the most important variable in both LDA and PDA, w
  
 - Let’s split training/testing in a 70:30 ratio where we train on training data and project testing data
 
-A 2-D LDA projection on the testing data is on the left and...
+1. A 2-D LDA projection on the testing data is on the left and...
 
-A 2-D PDA ($\lambda = 0.5$) projection on the testing data is on the right.
+2. A 2-D PDA ($\lambda = 0.5$) projection on the testing data is on the right.
 
 <p float="left">
   <img src="./img/cancer_1.png" width="45%" />
