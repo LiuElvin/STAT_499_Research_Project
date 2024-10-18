@@ -1,5 +1,11 @@
 # Classify High-Dimensional Data
 
+# Files
+
+- `./data` contains the colon cancer dataset used for projections.
+- `./code` includes all of the code.
+  - `./code/annotation`: annotations of useful R functions.
+
 # General Project Overview
 
 In machine learning, classification is a task that assigns a class label to examples from the problem domain. However, high dimensionality poses significant statistical challenges and renders many traditional classification algorithms impractical to use.
@@ -21,12 +27,6 @@ A link to the full page with all of the SPA DRP projects of Autumn 2023 (includi
 3. Afterwards, I implemented PDA to analyze a real-life colon cancer dataset alongside a simple toy example with large dimension count but small sample size.
 
 4. The results were summarized in my end of quarter presentation. It focussed primarily on the curse of dimensionality, LDA, PDA, their applications on both a toy and real-life dataset. The full slides and presentation can be found in the link [here](https://docs.google.com/presentation/d/1oSrP5NRSWhoQRwXVjOmNRvVN8d4FA-LlYU0DCK1PzhE/edit?usp=sharing).
-
-# Files
-
-- `./data` contains the colon cancer dataset used for projections.
-- `./code` includes all of the code.
-  - `./code/annotation`: annotations of useful R functions.
 
 ---
 
