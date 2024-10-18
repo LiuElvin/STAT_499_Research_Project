@@ -162,7 +162,7 @@ Using the `e1071` package in R, we can call the `svm()` function for a confusion
 
 $\text{Accuracy} = \frac{TP + TN}{TP + TN + FP + FN} = \frac{6 + 2}{6 + 2 + 3 + 0} = 0.7273$
 
-> The accuracy for PDA is substantially better
+The accuracy for PDA is substantially better
 
 ---
 
