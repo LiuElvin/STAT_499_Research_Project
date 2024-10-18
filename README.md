@@ -140,6 +140,10 @@ A 2-D PDA ($\lambda = 0.5$) projection on the testing data is on the right.
   <img src="./img/cancer_2.png" width="45%" /> 
 </p>
 
+The LDA projection on the testing data yields an accuracy of 0.8182.
+
+The PDA projection on the testing data yields an accuracy of 0.9091.
+
 Compared to an SVM...
 
 ---
