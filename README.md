@@ -14,11 +14,22 @@ A link to the full page with all of the SPA DRP projects of Autumn 2023 (includi
 
 My results were summarized in an end of quarter presentation. The full slide deck can be found [here](https://docs.google.com/presentation/d/1oSrP5NRSWhoQRwXVjOmNRvVN8d4FA-LlYU0DCK1PzhE/edit?usp=sharing).
 
+In order to access the projection pursuit packages
+
 # Files
 
 - `./data` contains the colon cancer dataset.
 - `./code` includes all of the code.
   - `./code/annotation`: annotations of useful R functions.
+ 
+## Set Up Side Note
+
+In order to access the projection pursuit library, you'll first need to use `devtools` and install like so:
+
+```{r}
+library(devtools)
+install_github("EK-LEE/classPP")
+```
 
 # Dummy Example Results
 
@@ -26,12 +37,28 @@ Below are the 1-D and 2-D projections of a dummy simulation.
 
 I've also provided some example code if reproduction is of interest.
 
-Set up code:
-
 ```{r}
-library(devtools)
-install_github("EK-LEE/classPP")
-library(classPP)
+num_dimensions <- 39
+num_data_points <- 20
+
+mean_class <- 2.2
+
+set.seed(123)
+class1_data <- matrix(rnorm(num_data_points * num_dimensions), nrow = num_data_points)
+class1_data[, 1] <- class1_data[, 1] + mean_class
+class1_data <- cbind(class1_data, rep(1, num_data_points))
+
+set.seed(123)
+class2_data <- matrix(rnorm(num_data_points * num_dimensions), nrow = num_data_points)
+class2_data[, 1] <- class2_data[, 1] - mean_class
+class2_data <- cbind(class2_data, rep(0, num_data_points))
+
+data <- rbind(class1_data, class2_data)
+
+class1_data_df <- as.data.frame(class1_data)
+ggplot(class1_data_df, aes(x = V1)) +
+  geom_histogram(binwidth = 0.1, fill = "red", color = "black") +
+  labs(title = "Histogram of Class 1 Data", x = "Variable 1")
 ```
 
 # Colon Cancer Dataset Results
