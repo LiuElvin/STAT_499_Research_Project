@@ -54,4 +54,4 @@ A link to the full page with all of the SPA DRP projects of Autumn 2023 (includi
 
 - Ran multiple projections on training / testing data and created corresponding graphs in R.
 
-- Found out first hand the advantages and disadvantages of projection techniques as opposed to standard classification techniques.
+- Practiced creating ideal dummy simulations and exploring why they differ in performance from real world examples.
