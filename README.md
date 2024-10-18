@@ -10,6 +10,8 @@ Next, we will mainly explore Penalized Discriminant Analysis (PDA), which is des
 
 Finally, we will implement PDA to analyze a real-life colon cancer dataset alongside some simple toy examples.
 
+A link to all of the SPA DRP projects of Autumn 2023 (including mine) is provided [here](https://spa-drp.github.io///past-projects/2023-autumn/).
+
 # Stuff
 
 1. In machine learning, classification is a task that assigns a class label to examples from the problem domain. However, high dimensionality poses significant statistical challenges and renders many traditional classification algorithms impractical to use.
