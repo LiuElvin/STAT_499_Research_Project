@@ -166,7 +166,7 @@ The accuracy for PDA is substantially better.
 
 A comparison of LDA's 10 most important columns compared to PDA's 10 most important columns.
 
-# (Incomplete)
+# (Tentative!!!)
 
 The following is a rather incomplete comparison between t-test (which measures significance of differences) and PDA.
 
