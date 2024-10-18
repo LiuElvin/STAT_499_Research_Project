@@ -116,7 +116,9 @@ title("PDA, Lambda = 0.1")
   <img src="./img/dummy_3.png" width="45%" /> 
 </p>
 
-Variable 1 is also unsurprisingly the most important variable in both LDA and PDA.
+Variable 1 is also unsurprisingly the most important variable in both LDA and PDA,
+
+PDA projecting almost entirely upon the 1st column.
 
 <p float="left">
   <img src="./img/dummy_4.png" width="45%" />
