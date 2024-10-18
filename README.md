@@ -118,7 +118,7 @@ title("PDA, Lambda = 0.1")
 
 The barcharts below represent the importance of each column in the projections for LDA and PDA. 
 
-Variable 1 is, unsurprisingly the most important variable in both LDA and PDA, with PDA projecting almost entirely upon the 1st column.
+Variable 1 is, unsurprisingly the most important variable in both LDA and PDA ($\lambda = 0.5$), with PDA projecting almost entirely upon the 1st column.
 
 <p float="left">
   <img src="./img/dummy_4.png" width="45%" />
@@ -127,9 +127,11 @@ Variable 1 is, unsurprisingly the most important variable in both LDA and PDA, w
 
 # Colon Cancer Dataset Results
 
+In the colon cancer dataset we predict whether a piece of connective tissue is normal or a malignant tumor.
+
 Class 1 represents normal tissue while Class 2 represents a malignant tumor.
 
-A 2-D LDA projection is on the left while a 2-D PDA projection is on the right.
+A 2-D LDA projection is on the left while a 2-D PDA ($\lambda = 0.5$) projection is on the right.
 
 <p float="left">
   <img src="./img/cancer_1.png" width="45%" />
