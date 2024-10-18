@@ -32,14 +32,22 @@ A link to the full page with all of the SPA DRP projects of Autumn 2023 (includi
 
 # Contributions
 
-- The annotation file is merely an annotation of a pre-existing package by Eun-Kyung Lee. The link to her code is provided [here](https://github.com/EK-Lee/classPP/blob/master/R/PPindex.R).
+- The annotation file is merely my annotations over a pre-existing package by Eun-Kyung Lee. The link to her code is provided [here](https://github.com/EK-Lee/classPP/blob/master/R/PPindex.R).
 
-- Zhaoxing Wu, my supervisor, provided the cirriculum and a lot of guidance for the direction of my project.
+- Zhaoxing Wu, my mentor, provided a list of machine learning literature for my understanding along with a lot of guidance for the direction of my project.
+
+  - A link to her paper, which much of my project is based off of, can be found [here](https://jds-online.org/journal/JDS/article/1326/info).
+
+# Learning Outcomes
+
+- Learnt theoretics behind classical supervised classification techniques (decision trees, random forests, etc.).
+
+- Learnt the curse of dimensionality and how  ruins traditional machine learning model predictions.
 
 # Learning Outcomes
 
 - Learnt theoretics behind classical supervised classification techniques.
 
-- Learnt the curse of dimensionality and how it ruins traditional machine learning models.
+- Learnt the curse of dimensionality and how it ruins traditional machine learning models on high dimension low sample size data.
 
 - Learnt the concept of Penalized Discriminant Analysis as an extension of Linear Discriminant Analysis.
