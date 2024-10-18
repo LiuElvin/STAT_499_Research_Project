@@ -62,13 +62,6 @@ set.seed(123)
 class2_data <- matrix(rnorm(num_data_points * num_dimensions), nrow = num_data_points)
 class2_data[, 1] <- class2_data[, 1] - mean_class
 class2_data <- cbind(class2_data, rep(0, num_data_points))
-
-data <- rbind(class1_data, class2_data)
-
-class1_data_df <- as.data.frame(class1_data)
-ggplot(class1_data_df, aes(x = V1)) +
-  geom_histogram(binwidth = 0.1, fill = "red", color = "black") +
-  labs(title = "Histogram of Class 1 Data", x = "Variable 1")
 ```
 
 <p float="left">
