@@ -1,4 +1,6 @@
-## Classify High-Dimensional Data
+# Classify High-Dimensional Data
+
+## September 2023 - December 2023
 
 ---
 
