@@ -1,0 +1,237 @@
+---
+title: "Annotation"
+author: "Elvin Liu"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(classPP)
+library(readxl)
+```
+
+```{r}
+# Define a function for optimizing projection pursuit using annealing
+PP.optimize.anneal <- function(PPmethod, projdim, data, class, std=TRUE,
+                               cooling=0.999, temp=1, energy=0.01, r=NULL,
+                               lambda=NULL, weight=TRUE, ...) {
+
+    # Convert data and class to matrices
+    data <- as.matrix(data)
+    class <- as.matrix(class)
+
+    # Get the number of variables (pp)
+    pp <- ncol(data)
+
+    # If std is TRUE, standardize the data
+    if (std) {
+        # Identify variables with zero variance
+        remove <- (1:pp)*(sd(data) == 0)
+        remove <- remove[remove != 0]
+
+        # Remove variables with zero variance
+        if (length(remove)!=0) {
+            warning("Removing variables with 0 variance")
+            data <- data[,-remove]
+        }
+
+        # Standardize the remaining data
+        data <- scale(data)
+    }
+
+    # Ensure class is a matrix with a single column
+    if (ncol(class) != 1) class <- t(class)
+
+    # Get the number of variables (p)
+    p <- ncol(data)
+
+    # Get the number of observations (n)
+    n <- nrow(data)
+
+    # Count the number of observations in each class
+    ngroup <- table(class)
+    
+    # Get the number of unique groups
+    groups <- length(ngroup)
+
+    # Create a numeric representation of class labels
+    class.num <- 1:groups
+    names(class.num) <- names(ngroup)
+    class.i <- matrix(class.num[as.character(class)], ncol = 1)
+
+    # Initialize some variables
+    val <- 1
+    proj <- matrix(1, p, projdim)
+    class.sort <- sort.list(class.i)
+    class <- class.i[class.sort]
+    data <- data[class.sort,]
+    ngroup <- table(class.i)
+    groups <- length(ngroup)
+    gname <- names(ngroup)
+
+    # Determine the projection pursuit method and set the method variable accordingly
+    if(PPmethod =="LDA" && weight) 
+        method <- 1
+    else if (PPmethod =="LDA" && !weight) 
+        method <- 2
+    else if (PPmethod == "Lp") {
+        method <- 3
+        if (is.null(r)) 
+            stop("You need to select parameter r!")
+    }
+    else if (PPmethod == "Gini") 
+        method <- 4
+    else if(PPmethod == "Ent") 
+        method <- 5
+    else if (PPmethod == "PDA") {
+        method <- 6
+        if (is.null(lambda)) 
+            stop("You need to select parameter lambda !")
+    }
+    else stop("You need to select PPmethod!")
+
+    # Call the optimize2 C function for projection pursuit optimization
+    Opt <- .C("optimize2", 
+              as.integer(n),
+              as.integer(p),
+              as.integer(groups),
+              x=as.double(data),
+              as.integer(class), 
+              as.integer(gname),
+              as.integer(ngroup),
+              as.integer(method),
+              cooling=as.double(cooling),
+              temp=as.double(temp),
+              projdim=as.integer(projdim),
+              index=as.double(val),
+              proj=as.double(proj),
+              as.double(energy),
+              as.integer(r),
+              as.double(lambda),
+              PACKAGE="classPP")
+
+    # Extract the results
+    index.best<-Opt$index
+    if (pp != p) {
+        proj.best <- matrix(0, pp, projdim)
+        proj.best[-remove,] <- matrix(Opt$proj, ncol=projdim)
+    } else {
+        proj.best <- matrix(Opt$proj, ncol=projdim)
+    }
+
+    # Return a list containing the optimization results
+    list(index.best=index.best, proj.best=proj.best)
+}
+```
+
+```{r PP.optimize.plot}
+# Define a function for plotting the results of projection pursuit optimization
+PP.optimize.plot <- function(PP.opt, data, class, std=TRUE) { 
+
+    # Get the number of variables (pp) in the data
+    pp <- ncol(data)
+
+    # Get the number of observations (n) in the data
+    n <- nrow(data);
+
+    # If std is TRUE, standardize the data
+    if(std) {
+        # Identify variables with zero variance
+        remove <- c(1:pp)*(apply(data,2,sd) == 0)
+        remove <- remove[remove != 0]
+
+        # Remove variables with zero variance
+        if (length(remove) != 0) {
+            warning("Remove variables with 0 variance")
+            data <- data[,-remove]
+        } 
+
+        # Standardize the remaining data
+        data.s <- scale(data)
+
+        # Adjust data matrix if there were variables removed
+        if (pp != ncol(data.s)) {
+            data <- matrix(0, n, pp)
+            data[,-remove] <- matrix(data.s, ncol=pp)
+        }
+    }
+
+    # Convert data to a matrix
+    data <- as.matrix(data)
+
+    # Get the number of observations (n) in the data
+    n <- nrow(data)
+
+    # Convert class to a matrix
+    class <- as.matrix(class)
+
+    # Ensure class is a matrix with a single column
+    if (ncol(class) != 1) class <- t(class)
+
+    # Count the number of observations in each class
+    ngroup <- table(class)
+    groups <- length(ngroup)
+
+    # Create a numeric representation of class labels
+    class.num <- 1:groups
+    names(class.num) <- names(ngroup)
+    t.class <- matrix(class.num[as.character(class)], ncol=1)
+
+    # Get the number of dimensions (p) in the optimized projection
+    p <- ncol(PP.opt$proj.best)
+
+    # Project the data onto the optimized projection
+    proj.data <- as.matrix(data) %*% PP.opt$proj.best
+
+    # Initialize labels
+    labels <- NULL
+
+    # Create labels for each dimension in the optimized projection
+    for (i in 1:p)
+        labels <- c(labels, paste("PP",i,sep=""))
+
+    # Plot the results based on the number of dimensions
+    if (p == 1) { 
+        # If there is only one dimension, plot a histogram
+        hist(proj.data, main=" ", xlab=labels[1]) 
+
+        # Add text labels to the histogram
+        ngroup <- table(t.class)
+        ng <- length(ngroup)
+        sort.index <- sort.list(t.class)
+        sort.data <- sort(t.class)
+        k <- 0
+        step <- n / 10 / ng
+        
+        # Places class labels onto a histogram
+        # ng is the number of unique classes
+        for (j in 1:ng) {
+            ngg <- ngroup[j]
+            # ngg is the number of observations in class j
+            for(i in 1:ngg) {
+                k <- k + 1
+                # Labels are positioned @ the corresponding x-coordinate and vertically spaced by a factor of "step"
+                text(proj.data[sort.index[k]], step*j, 
+                     as.character(t.class[sort.index[k]]), cex=2)  
+            }
+        }
+    } else {
+        if (p == 2) {
+            # If there are two dimensions, plot a scatter plot
+            par(pty='s')
+            plot(proj.data[,1], proj.data[,2], type='n', xlab=labels[1],
+                 ylab=labels[2])
+
+            # Add text labels to the scatter plot
+            text(proj.data[,1], proj.data[,2], as.character(t.class), cex=2) 
+        } else {
+            # If there are more than two dimensions, use pairs plot
+            g <- length(table(t.class))
+            t.class <- as.numeric(t.class)
+            color <- colors()[(1:g) * 10]
+            pairs(proj.data, pch=21, bg=color[t.class], labels)
+        }
+    }
+}
+```

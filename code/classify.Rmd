@@ -1,0 +1,505 @@
+---
+title: "Dummy"
+author: "Elvin Liu"
+date: "`r Sys.Date()`"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+library(ggplot2)
+library(classPP)
+library(readxl)
+
+library(e1071)
+```
+
+```{r Dummy Data}
+num_dimensions <- 39
+num_data_points <- 20
+
+mean_class <- 2.2
+
+set.seed(123)
+class1_data <- matrix(rnorm(num_data_points * num_dimensions), nrow = num_data_points)
+class1_data[, 1] <- class1_data[, 1] + mean_class
+class1_data <- cbind(class1_data, rep(1, num_data_points))
+
+set.seed(123)
+class2_data <- matrix(rnorm(num_data_points * num_dimensions), nrow = num_data_points)
+class2_data[, 1] <- class2_data[, 1] - mean_class
+class2_data <- cbind(class2_data, rep(0, num_data_points))
+
+data <- rbind(class1_data, class2_data)
+
+class1_data_df <- as.data.frame(class1_data)
+ggplot(class1_data_df, aes(x = V1)) +
+  geom_histogram(binwidth = 0.1, fill = "red", color = "black") +
+  labs(title = "Histogram of Class 1 Data", x = "Variable 1")
+
+class2_data_df <- as.data.frame(class2_data)
+ggplot(class2_data_df, aes(x = V1)) +
+  geom_histogram(binwidth = 0.1, fill = "blue", color = "black") +
+  labs(title = "Histogram of Class 2 Data", x = "Variable 1")
+
+data_df <- as.data.frame(data)
+ggplot(data_df, aes(x = V1, fill = factor(ifelse(V1 >= 0, "Group 1", "Group 2")))) +
+  geom_histogram(binwidth = 0.1) +
+  scale_fill_manual(values = c("Group 1" = "red", "Group 2" = "blue")) +
+  labs(title = "Histogram of Class 1 and 2 Data", x = "Variable 1")
+```
+
+```{r Dummy Graphs}
+test_proportion <- 0.25
+n <- nrow(data_df)
+ind <- sample(1:n, test_proportion * n, replace = FALSE)
+
+test <- (data_df[ind, 1:(n - 1)])
+train <- (data_df[-ind, 1:(n - 1)])
+
+target_labels <- data_df$V40
+class_test <- as.data.frame(target_labels[ind])
+class_train <- as.data.frame(target_labels[-ind])
+par(mfrow = c(2, 2))
+
+PP.opt = PP.optimize.anneal("LDA", 1, train, class_train)
+PP.optimize.plot(PP.opt, train, class_train)
+title("LDA")
+
+PP.opt = PP.optimize.anneal("LDA", 2, train, class_train)
+PP.optimize.plot(PP.opt, train, class_train)
+title("LDA")
+
+PP.opt = PP.optimize.anneal("PDA", 1, train, class_train, lambda = 0.1)
+PP.optimize.plot(PP.opt, train, class_train)
+title("PDA, Lambda = 0.1")
+
+PP.opt = PP.optimize.anneal("PDA", 2, train, class_train, lambda = 0.1)
+PP.optimize.plot(PP.opt, train, class_train)
+title("PDA, Lambda = 0.1")
+
+PP.opt = PP.optimize.anneal("PDA", 1, train, class_train, lambda = 0.5)
+PP.optimize.plot(PP.opt, train, class_train)
+title("PDA, Lambda = 0.5")
+
+PP.opt = PP.optimize.anneal("PDA", 2, train, class_train, lambda = 0.5)
+PP.optimize.plot(PP.opt, train, class_train)
+title("PDA, Lambda = 0.5")
+
+PP.opt = PP.optimize.anneal("PDA", 1, train, class_train, lambda = 0.9)
+PP.optimize.plot(PP.opt, train, class_train)
+title("PDA, Lambda = 0.9")
+
+PP.opt = PP.optimize.anneal("PDA", 2, train, class_train, lambda = 0.9)
+PP.optimize.plot(PP.opt, train, class_train)
+title("PDA, Lambda = 0.9")
+
+# Check importance of each variable
+PP.opt = PP.optimize.anneal("LDA", 1, train, class_train)
+LDA_coefficient <- cbind( abs(as.data.frame(PP.opt[["proj.best"]])), variable = 1:(n - 1))
+ggplot(LDA_coefficient, aes(x = variable, y = V1)) +
+  geom_bar(stat = "identity") +
+  geom_vline(xintercept = 1) +
+  labs(title = "LDA", x = "Variable", y = "Frequency") +
+  scale_x_continuous(breaks = 1:(n - 1)) +
+  scale_y_continuous(limits = c(0, 1))
+
+PP.opt = PP.optimize.anneal("PDA", 1, train, class_train, lambda = 0.5)
+LDA_coefficient <- cbind( abs(as.data.frame(PP.opt[["proj.best"]])), variable = 1:(n - 1))
+ggplot(LDA_coefficient, aes(x = variable, y = V1)) +
+  geom_bar(stat = "identity") +
+  geom_vline(xintercept = 1) +
+  labs(title = "PDA, Lambda = 0.5", x = "Variable", y = "Frequency") +
+  scale_x_continuous(breaks = 1:(n - 1)) +
+  scale_y_continuous(limits = c(0, 1))
+
+# (proj.data.test = as.matrix(test)%*%PP.opt$proj.best)
+# (proj.data.train = as.matrix(train)%*%PP.opt$proj.best)
+
+# acc(PP.opt$proj.best, t(train), t(test), cls_train, cls_test)
+
+# S(as.matrix(df), class, "PDA", 2, seq(0, 0.99, 0.01))
+```
+
+```{r Dummy Example}
+set.seed(123)
+n = 40
+p = 40
+
+df = scale(as.data.frame(cbind(
+      rbind(matrix(rnorm(n/2,2.2),,1),
+      matrix(rnorm(n/2, -2.2),,1)),
+      matrix(rnorm(n*(p-1)),,p-1))))
+
+class = c(rep(1, n/2), rep(2, n/2))
+
+par(mfrow = c(2, 2))
+
+PP.opt = PP.optimize.anneal("LDA", 1, df, class)
+PP.optimize.plot(PP.opt, df, class)
+title("LDA")
+
+PP.opt = PP.optimize.anneal("LDA", 2, df, class)
+PP.optimize.plot(PP.opt, df, class)
+title("LDA")
+
+PP.opt = PP.optimize.anneal("PDA", 1, df, class, lambda = 0.7)
+PP.optimize.plot(PP.opt, df, class)
+title("PDA")
+
+PP.opt = PP.optimize.anneal("PDA", 2, df, class, lambda = 0.7)
+PP.optimize.plot(PP.opt, df, class)
+title("PDA")
+```
+
+```{r Real Data}
+excel_data <- read_excel("~/Downloads/Carcinoma.xls", sheet = "Cancer")
+
+# Remove rows without an Accession Number (in this case the first 7 rows)
+data_no_na_rows <- excel_data[complete.cases(excel_data$`Accession Number`), ]
+
+# Remove columns containing any 'NA'
+data_no_na_columns <- data_no_na_rows[, colSums(is.na(data_no_na_rows)) < nrow(data_no_na_rows)]
+
+# Remove column "T-Test"
+col_ttest <- which(colnames(data_no_na_columns) == "T-Test tumor vs. normal")
+data_no_ttest <- data_no_na_columns[, -col_ttest]
+
+# Check to see size of data s.t. there are 6600 non-duplicate gene expressions
+your_data <- data_no_ttest[!duplicated(data_no_ttest$`Accession Number`), ]
+
+# Transpose the data
+transposed_data <- t(your_data)
+
+# Change the column names to the Accession Number
+row_accession <- which(rownames(transposed_data) == "Accession Number")
+colnames(transposed_data) <- transposed_data[row_accession, ]
+
+# Remove row "Accession Number"
+data_no_accession <- transposed_data[-row_accession, ]
+
+# Remove row "Description
+row_description = which(rownames(data_no_accession) == "Description")
+data_no_description <- data_no_accession[-row_description, ]
+
+# Change data to numeric
+numeric_data <- apply(data_no_description, 2, as.numeric)
+rownames(numeric_data) <- rownames(data_no_description)
+
+# Create classifier based off which samples are tumors and which aren't
+classifier <- ifelse(grepl("Tumor", rownames(numeric_data)), 1, 0)
+```
+
+```{r Real Graphs 1}
+par(mfrow = c(2, 2))
+
+PP.opt_LDA_1_dim <- PP.optimize.anneal("LDA", 1, numeric_data, classifier)
+PP.optimize.plot(PP.opt_LDA_1_dim, numeric_data, classifier)
+title("LDA")
+
+PP.opt_LDA_2_dim <- PP.optimize.anneal("LDA", 2, numeric_data, classifier)
+PP.optimize.plot(PP.opt_LDA_2_dim, numeric_data, classifier)
+title("LDA")
+
+PP.opt_PDA_0.1_1_dim <- PP.optimize.anneal("PDA", 1, numeric_data, classifier, lambda = 0.1)
+PP.optimize.plot(PP.opt_PDA_0.1_1_dim, numeric_data, classifier)
+title("PDA, Lambda = 0.1")
+
+PP.opt_PDA_0.1_2_dim <- PP.optimize.anneal("PDA", 2, numeric_data, classifier, lambda = 0.1)
+PP.optimize.plot(PP.opt_PDA_0.1_2_dim, numeric_data, classifier)
+title("PDA, Lambda = 0.1")
+```
+
+```{r Real Graphs 2}
+par(mfrow = c(2, 2))
+
+PP.opt_PDA_0.5_1_dim <- PP.optimize.anneal("PDA", 1, numeric_data, classifier, lambda = 0.5)
+PP.optimize.plot(PP.opt_PDA_0.5_1_dim, numeric_data, classifier)
+title("PDA, Lambda = 0.5")
+
+PP.opt_PDA_0.5_2_dim <- PP.optimize.anneal("PDA", 2, numeric_data, classifier, lambda = 0.5)
+PP.optimize.plot(PP.opt_PDA_0.5_2_dim, numeric_data, classifier)
+title("PDA, Lambda = 0.5")
+
+PP.opt_PDA_0.9_1_dim <- PP.optimize.anneal("PDA", 1, numeric_data, classifier, lambda = 0.9)
+PP.optimize.plot(PP.opt_PDA_0.9_1_dim, numeric_data, classifier)
+title("PDA, Lambda = 0.9")
+
+PP.opt_PDA_0.9_2_dim <- PP.optimize.anneal("PDA", 2, numeric_data, classifier, lambda = 0.9)
+PP.optimize.plot(PP.opt_PDA_0.9_2_dim, numeric_data, classifier)
+title("PDA, Lambda = 0.9")
+```
+
+```{r Real PP Comparison}
+LDA_coefficient <- cbind( abs(as.data.frame(PP.opt_LDA_1_dim[["proj.best"]])), variable = 1:ncol(numeric_data))
+ggplot(LDA_coefficient, aes(x = variable, y = V1)) +
+  geom_bar(stat = "identity") +
+  labs(title = "LDA", x = "Variable", y = "Frequency") +
+  scale_y_continuous(limits = c(0, .050))
+
+PDA_coefficient <- cbind( abs(as.data.frame(PP.opt_PDA_0.5_1_dim[["proj.best"]])), variable = 1:ncol(numeric_data))
+ggplot(PDA_coefficient, aes(x = variable, y = V1)) +
+  geom_bar(stat = "identity") +
+  labs(title = "PDA, Lambda = 0.5", x = "Variable", y = "Frequency") +
+  scale_y_continuous(limits = c(0, .050))
+```
+
+```{R Real Most Important Projections}
+# Best 10 mRNA for LDA compared to PDA (0.5)
+sorted_indices_LDA <- order(abs(PP.opt_LDA_1_dim$proj.best), decreasing = TRUE)
+top_10_indices_LDA <- sorted_indices_LDA[1:10]
+
+top_10_values_LDA <- PP.opt_LDA_1_dim$proj.best[top_10_indices_LDA]
+top_10_values_LDA_PDA_0.5 <- PP.opt_PDA_0.5_1_dim$proj.best[top_10_indices_LDA]
+
+comparison_df_1 <- data.frame(
+  ID = colnames(numeric_data)[top_10_indices_LDA],
+  LDA = abs(top_10_values_LDA),
+  PDA_0.5 = abs(top_10_values_LDA_PDA_0.5)
+)
+
+ggplot(comparison_df_1, aes(x = factor(ID, levels = unique(ID)))) +
+  geom_bar(aes(y = LDA, fill = "LDA"), stat = "identity", position = "dodge", width = 0.7) +
+  geom_bar(aes(y = PDA_0.5, fill = "PDA_0.5"), stat = "identity", position = "dodge",
+                                                                              width = 0.7) +
+  scale_color_manual(values = c("LDA" = "blue", "PDA_0.5" = "red")) +
+  labs(title = "LDA's 10 Best Projections",
+       x = "Gene Expression",
+       y = "Significance") +
+  theme_minimal() +
+  scale_y_continuous(limits = c(0, .050))
+
+# Best 10 mRNA for PDA (0.5) compared to LDA
+sorted_indices_PDA_0.5 <- order(abs(PP.opt_PDA_0.5_1_dim$proj.best), decreasing = TRUE)
+top_10_indices_PDA_0.5 <- sorted_indices_PDA_0.5[1:10]
+
+top_10_values_PDA_0.5 <- PP.opt_PDA_0.5_1_dim$proj.best[top_10_indices_PDA_0.5]
+top_10_values_PDA_0.5_LDA <- PP.opt_LDA_1_dim$proj.best[top_10_indices_PDA_0.5]
+
+comparison_df_2 <- data.frame(
+  ID = colnames(numeric_data)[top_10_indices_PDA_0.5],
+  PDA_0.5 = abs(top_10_values_PDA_0.5),
+  LDA = abs(top_10_values_PDA_0.5_LDA)
+)
+
+ggplot(comparison_df_2, aes(x = factor(ID, levels = unique(ID)))) +
+  geom_bar(aes(y = PDA_0.5, fill = "PDA_0.5"), stat = "identity", position = "dodge",
+                                                                              width = 0.7) +
+  geom_bar(aes(y = LDA, fill = "LDA"), stat = "identity", position = "dodge", width = 0.7) +
+  scale_color_manual(values = c("PDA_0.5" = "blue", "LDA" = "red")) +
+  labs(title = "PDA's 10 Best Projections",
+       x = "Gene Expression",
+       y = "Significance") +
+  theme_minimal() +
+  scale_y_continuous(limits = c(0, .050))
+```
+
+```{r Accuracy Function}
+# The function 'acc' takes as input:
+#   a: the projection matrix
+#   train: the training dataset
+#   test: the testing dataset
+#   cls_train: the true class labels for the training dataset
+#   cls_test: the true class labels for the testing dataset
+acc = function(a, train, test, cls_train, cls_test){
+  # Get the average of classes in the training dataset
+  cls_mean = data.frame(rep(NA, nrow(train)))
+  
+  # Iterate through each unique class in the training dataset
+  for (i in unique(cls_train))
+    # Append the row means of the training dataset for each class
+    cls_mean = cbind(cls_mean, rowMeans(train[, cls_train==i]))
+  # Remove the first column of NA
+  cls_mean = cls_mean[,-1]
+  
+  # Initialize an empty vector 'rst' to store predicted class labels for each test data point
+  rst = c()
+  
+  # Iterate through each test data point
+  for (i in 1:ncol(test)){
+    # Store the distance of one data point to each class
+    temp=c()
+    
+    # Iterate through each class
+    for (j in 1:ncol(cls_mean)){
+      # Store the distance of one data point to one class
+      x = 0
+      #Iterate through the projected dimension
+      for (k in 1:ncol(a))
+        # Calculates the squared distance between a test data point and the mean of a class
+        x=x+(a[,k]%*%(test[,i]-cls_mean[,j]))^2
+      temp=c(temp, x)
+    }
+    
+    # Store the predicted class label for the test data point based on the minimum distance
+    rst = c(rst, unique(cls_train)[which.min(temp)])
+  }
+  
+  # Calculate and return the accuracy by comparing predicted and true class labels
+  return (sum(rst==cls_test)/length(cls_test))
+}
+```
+
+```{r Plot Function}
+# Function to plot the train and test datasets on the same graph after projection
+# Arguments:
+#   proj.data.test: Test dataset after projection
+#   proj.data.train: Train dataset after projection
+#   cls_test: Vector of classes of the test dataset
+#   cls_train: Vector of classes of the train dataset
+#   cls_tot: Vector of distinct classes in the entire dataset
+plot_test_train = function(proj.data.test, proj.data.train, cls_test, cls_train,
+                           cls_tot){
+  
+  # Set the plot limits based on the minimum and maximum values of the projections
+  lim = c(min(min(proj.data.test), min(proj.data.train)), 
+          max(max(proj.data.test), max(proj.data.train)))
+  
+  # Create an empty plot with specified limits and labels
+  plot(x=NA, y=NA, xlim = lim, ylim= lim, xlab="", ylab="", main="", axes=FALSE,
+       frame.plot=TRUE)
+  
+  # Iterate over distinct classes in the entire dataset
+  for (i in 1:length(cls_tot)){
+    # Plot projected test data points for the current class
+    points(proj.data.test[,1][cls_test == cls_tot[i]], 
+           proj.data.test[,2][cls_test == cls_tot[i]], 
+           pch = i, col = "darkgrey")
+  }
+  
+  # Plot projected train data points and annotate with class labels
+  text(proj.data.train[,1], proj.data.train[,2], as.numeric(factor(cls_train)), 
+       cex=1)
+}
+```
+
+```{r Training Validation Set}
+combined_data <- cbind(classifier, numeric_data)
+combined_df <- as.data.frame(combined_data)
+combined_df$classifier <- ifelse(combined_df$classifier == 1, "Tumor", "Normal")
+
+set.seed(123)
+train <- sample(nrow(combined_df), 0.7 * nrow(combined_df))
+
+# Split the data into training and testing/validation
+combined_df.train <- combined_df[train,]
+combined_df.validate <- combined_df[-train,]
+
+table(combined_df.train$classifier)
+table(combined_df.validate$classifier)
+
+# The same as combined_df.train and combined_df.validate except no classifier in one combined matrix
+class.train <- combined_df.train$classifier
+no_class.train <- as.matrix(combined_df.train[, -classifier])
+class.validate <- combined_df.validate$classifier
+no_class.validate <- as.matrix(combined_df.validate[, -classifier])
+
+PP.opt_LDA_Training <- PP.optimize.anneal(PPmethod = "LDA", projdim = 2, data = no_class.train, class = class.train)
+acc(PP.opt_LDA_Training$proj.best, t(no_class.train), t(no_class.validate), class.train, class.validate)
+
+PP.opt_PDA_Training <- PP.optimize.anneal("PDA", 2, no_class.train, class.train, lambda = 0.5)
+acc(PP.opt_PDA_Training$proj.best, t(no_class.train), t(no_class.validate), class.train, class.validate)
+
+# Plot the training and test tests for comparison (2 dimension)
+PP.optimize.plot(PP.opt_LDA_Training, numeric_data, classifier)
+PP.optimize.plot(PP.opt_PDA_Training, numeric_data, classifier)
+
+proj.data.test_LDA <- as.matrix(no_class.validate)%*%PP.opt_LDA_Training$proj.best
+proj.data.train_LDA <- as.matrix(no_class.train)%*%PP.opt_LDA_Training$proj.best
+plot_test_train(proj.data.test_LDA, proj.data.train_LDA, class.validate, class.train,
+               levels(as.factor(classifier)))
+
+proj.data.test_PDA <- as.matrix(no_class.validate)%*%PP.opt_PDA_Training$proj.best
+proj.data.train_PDA <- as.matrix(no_class.train)%*%PP.opt_PDA_Training$proj.best
+plot_test_train(proj.data.test_PDA, proj.data.train_PDA, class.validate, class.train,
+               levels(as.factor(classifier)))
+```
+
+```{r}
+# Load workspace
+load("myworkspace.RData")
+```
+
+```{r T-Test Most Important}
+your_ttest <- data_no_na_columns[!duplicated(data_no_na_columns$`Accession Number`), ]
+t_test_row <- t(your_ttest[, col_ttest])
+
+# Best 10 mRNA for T-Test compared to PDA (0.5)
+sorted_indices_ttest <- order(abs(t_test_row), decreasing = FALSE)
+top_10_indices_ttest <- sorted_indices_ttest[1:10]
+
+top_10_values_ttest <- t_test_row[top_10_indices_ttest]
+top_10_values_ttest_PDA_0.5 <- PP.opt_PDA_0.5_1_dim$proj.best[top_10_indices_ttest]
+
+comparison_df_3 <- data.frame(
+  ID = colnames(numeric_data)[top_10_indices_ttest],
+  t_test = (abs(top_10_values_ttest)),
+  PDA_0.5 = -1 * abs(top_10_values_ttest_PDA_0.5)
+)
+
+ggplot(comparison_df_3, aes(x = reorder(factor(ID, levels = unique(ID)), -t_test))) +
+  geom_bar(aes(y = t_test, fill = "t_test"), stat = "identity", position = "dodge", width = 0.7) +
+  geom_bar(aes(y = PDA_0.5, fill = "PDA_0.5"), stat = "identity", position = "dodge", width = 0.7) +
+  scale_color_manual(values = c("t_test" = "blue", "PDA_0.5" = "red")) +
+  labs(title = "T-Test's 10 Best Projections",
+       x = "Gene Expression",
+       y = "Significance") +
+  theme_minimal()
+
+# Best 10 mRNA for PDA (0.5) compared to LDA
+# sorted_indices_PDA_0.5 <- order(abs(PP.opt_PDA_0.5_1_dim$proj.best), decreasing = TRUE)
+# top_10_indices_PDA_0.5 <- sorted_indices_PDA_0.5[1:10]
+
+# top_10_values_PDA_0.5 <- PP.opt_PDA_0.5_1_dim$proj.best[top_10_indices_PDA_0.5]
+top_10_values_ttest_0.5_LDA <- t_test_row[top_10_indices_PDA_0.5]
+
+comparison_df_4 <- data.frame(
+  ID = colnames(numeric_data)[top_10_indices_PDA_0.5],
+  PDA_0.5 = abs(top_10_values_PDA_0.5),
+  t_test = -1 * abs(top_10_values_ttest_0.5_LDA)
+)
+
+ggplot(comparison_df_4, aes(x = factor(ID, levels = unique(ID)))) +
+  geom_bar(aes(y = PDA_0.5, fill = "PDA_0.5"), stat = "identity", position = "dodge",
+                                                                              width = 0.7) +
+  geom_bar(aes(y = t_test, fill = "t_test"), stat = "identity", position = "dodge", width = 0.7) +
+  scale_color_manual(values = c("PDA_0.5" = "blue", "t_test" = "red")) +
+  labs(title = "PDA's 10 Best Projections",
+       x = "Gene Expression",
+       y = "Significance") +
+  theme_minimal()
+```
+
+```{r A support vector machine}
+# Split the data into training and testing/validation
+combined_df.train.SVM <- as.data.frame(combined_data[train,])
+combined_df.validate.SVM <- as.data.frame(combined_data[-train,])
+
+# SVM
+set.seed(1234)
+
+fit.svm <- svm(classifier~., data = combined_df.train.SVM, type = "C-classification")
+fit.svm
+svm.pred <- predict(fit.svm, na.omit(combined_df.validate.SVM))
+svm.perf <- table(na.omit(combined_df.validate.SVM)$classifier, 
+                  svm.pred, dnn = c("Actual", "Predicted"))
+svm.perf
+```
+
+```{r Real Data Logistic Regression}
+# fit.logit <- glm(classifier~., data = combined_df.train, family = binomial()) 
+# summary(fit.logit)
+
+# prob <- predict(fit.logit, combined_df.validate, type = "response")
+# logit.pred <- factor(prob > .5, levels = c(FALSE, TRUE), 
+#                      labels = c("Normal", "Tumor"))
+
+# logit.perf <- table(combined_df.validate$classifier, logit.pred, 
+#                     dnn = c("Actual", "Predicted"))
+
+# logit.perf
+```
+
+```{r}
+# Save workspace
+# save.image("myworkspace.RData")
+```
