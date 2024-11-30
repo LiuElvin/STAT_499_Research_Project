@@ -284,3 +284,9 @@ Nearing the end of the project, I prioritized my presentation over this portion.
 - Implemented classical supervised classification techniques in `R`
 
 - Learnt the curse of dimensionality and how high dimensional low sample size data ruins traditional machine learning algorithms
+
+- Learnt the concept of Penalized Discriminant Analysis as an extension of Linear Discriminant Analysis
+
+- Learnt to create ideal dummy simulations and generalize their results for future testing
+
+- Implemented multiple projection functions on real training / testing data and created corresponding graphs in `R`
